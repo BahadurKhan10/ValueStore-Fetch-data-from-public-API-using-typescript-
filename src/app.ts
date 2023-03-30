@@ -1,19 +1,16 @@
-// Fetching Data from FakeStoreAPi 
-// 
+// // Fetching Data from FakeStoreAPi 
 
 interface ItemDetails {
-    title: string;
-    description: string;
-    price: number;
-    image: string;
-  }
-
+  title: string;
+  description: string;
+  price: number;
+  image: string;
+}
 
 fetch("https://fakestoreapi.com/products")
-  .then((data: Response) => {
-    return data.json();
-  })
-  .then((objectData: ItemDetails[]) => {
+  .then((response: Response) => response.text())
+  .then((responseData: string) => {
+    const objectData: ItemDetails[] = JSON.parse(responseData);
     let tableData = "";
     objectData.map((values) => {
       tableData += `<tr>
@@ -31,6 +28,4 @@ fetch("https://fakestoreapi.com/products")
   .catch((err: Error) => {
     console.error(err, "Error in fetching data");
   });
-
-
 
